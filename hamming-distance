@@ -1,0 +1,78 @@
+// The Hamming distance between two integers is the number of positions at which the corresponding bits are different.
+// Given two integers x and y, calculate the Hamming distance.
+
+public class Solution {
+    public int hammingDistance(int x, int y) 
+    {
+        String strX = getBinary(x);
+        String strY = getBinary(y);
+        
+        if (strX.length() > strY.length())
+        {
+        	while (strX.length() > strY.length())
+        	{
+        		strY = 0 + strY;
+        	}
+        }
+        else if (strX.length() < strY.length())
+        {
+        	while (strX.length() < strY.length())
+        	{
+        		strX = 0 + strX;
+        	}
+        }
+        
+        int len = strX.length();
+        int dist = 0;
+        
+        for (int i = 0; i < len; i++)
+        {
+        	if (!strX.substring(i, i + 1).equals(strY.substring(i, i + 1)))
+        	{
+        		dist++;
+        	}
+        }
+        return dist;
+    }
+
+    public String getBinary(int z)
+    {
+        int exp = 0;
+        StringBuilder binary = new StringBuilder();
+        
+        while (z > Math.pow(2, exp))
+        {
+            exp++;
+        }
+
+        
+        if (z != Math.pow(2, exp))
+        {
+            exp--;
+        }
+        
+        while (z > 0 && exp >= 0)
+        {
+            if ((z - Math.pow(2, exp)) >= 0)
+            {
+                binary.append(1);
+                z = (int)(z - Math.pow(2, exp));
+                exp--;
+            }
+            else
+            {
+                binary.append(0);
+                exp--;
+            }
+        }
+        while (exp >= 0)
+        {
+        	binary.append(0);
+        	exp--;
+        }
+        
+        return binary.toString();
+        
+    }
+
+}
