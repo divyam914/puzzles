@@ -1,0 +1,31 @@
+// Given a positive integer, output its complement number. The complement strategy is to flip the bits of its binary representation.
+
+// Note:
+// The given integer is guaranteed to fit within the range of a 32-bit signed integer.
+// You could assume no leading zero bit in the integer’s binary representation.
+
+
+public class Solution 
+{
+	public static int findComplement(int num) 
+    {
+		int num_bi = num ^ 0;
+		StringBuilder ones_sb = new StringBuilder();
+		
+		while (num_bi > 0)
+		{
+			ones_sb.append("1");
+			num_bi = num_bi / 2;
+		}
+		
+		String one = ones_sb.toString();
+		int ones = 0;
+		
+		for (int i = 0; i < one.length(); i++)
+		{
+			ones = (int)(ones + Math.pow(2, i));
+		}
+		
+		return num ^ ones;
+    }
+}
